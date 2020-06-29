@@ -104,6 +104,7 @@
                                         /*  ++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
                                         /* PUT ANY CHANGES TO THE JAVASCRIPT HERE  */
+
                                         // How do I function this be pasted on the second canvas
 
                                     } // end of img.onload
@@ -157,8 +158,9 @@
                 context2.fillText("The edited image will go here", 10, 20);
 
                 function copy() {
-                    var imgData = ctx.getImageData(0, 0, 600, 500)
-                    ctx2.putImageData(imgData, "mySecondCanvas")
+                    console.log(imgData)
+                    var imgData = context.getImageData(0, 0, 600, 500)
+                    context2.putImageData(imgData, 0, 0)
                 }
             </script>
 
