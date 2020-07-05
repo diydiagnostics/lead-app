@@ -147,28 +147,6 @@
                 context.fillText("Original image will go here", 10, 20);
             </script>
 
-            <canvas id="mySecondCanvas" width=600 height=500 style="border:1px solid #d3d3d3;"></canvas>
-            <!-- Created a second canvas-->
-            <script type="text/javascript">
-                // This is to identifies and initiates the second canvas
-                var canvas2 = document.getElementById('mySecondCanvas');
-                var context2 = canvas2.getContext("2d");
-                context2.font = "20pt Calibri"
-                context2.fillStyle = "black"
-                context2.fillText("Edited image will go here", 10, 20);
-                // context2 and cavnas2 is to identify the SECOND canvas!!
-
-                function copy() {
-                    console.log(imgData)
-                        // this is not necessary, used to check if the function works
-                    var imgData = context.getImageData(0, 0, 600, 500)
-                        // this will copy the pixel data from the original image in the first canvas
-                    context2.putImageData(imgData, 0, 0)
-                        // context2 identifies that the image will go on the second canvas
-                        // putImageData will put the image back on the second canvas
-                        // remember need to put parameters
-                }
-            </script>
 
             
 
