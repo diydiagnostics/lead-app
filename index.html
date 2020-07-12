@@ -43,11 +43,11 @@
         console.log("This file last modified  " + docMod); // displays last modified date and time in the javascipt browser console
     </script>
 </head>
+<div class="header">
+    <h1>Detecting Lead in Water</h1>
 
-<body>
-    <div data-role="page">
-        <div data-role="header">
-            <h1>Detecting Lead in Water</h1>
+    <body>
+        <div data-role="page">
 
             <div data-role='container'>
                 <script>
@@ -62,7 +62,7 @@
                         p.setup = function() { // how to create a canvas and choose a file to put into the canvas
                             p.createCanvas(600, 500) // this creates a canvas to paste the image
                             input = p.createFileInput(handleFile); // this is a choose file that can then choose an image from the device
-                            input.position(0, 0); // this tells where to put the file on the canvas
+                            input.position(400, 650); // this tells where to button on the app page
                             pixelP = p.createP('') // used for paragraph length text
                         }
 
@@ -78,7 +78,7 @@
                         let handleFile = function(file) {
                             console.log(file.name) //this will tests out if the function is working
                             if (file.type === 'image') {
-                                img = p.createImg(file.data, ''); 
+                                img = p.createImg(file.data, '');
                                 console.log(img) // checks to see if img is defined
                                 img.hide();
                             } else {
@@ -93,11 +93,33 @@
 
             </div>
             <!-- /content -->
+            <style>
+                .header {
+                    padding: 15px;
+                    text-align: center;
+                    background: orange;
+                    color: white;
+                    font-size: 15px;
+                }
+                
+                .footer {
+                    position: fixed;
+                    left: 0;
+                    bottom: 0;
+                    width: 100%;
+                    background-color: orange;
+                    color: white;
+                    text-align: center;
+                }
+            </style>
 
+            <div class="footer">
+                <p>DIY Diagnostics</p>
+            </div>
             <!-- /footer -->
         </div>
         <!-- /page -->
-</body>
+    </body>
 
 
 </html>
