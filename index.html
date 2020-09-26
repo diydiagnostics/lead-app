@@ -30,96 +30,129 @@
   blah, blah, blah, blah
 -->
 
+
 <head>
     <meta charset="utf-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=.7">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+    <link rel="stylesheet" href="w3.css">
+    <link rel="stylesheet" href="w3-colors-flat.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js" integrity="sha512-At/xiUTqCg8jxnCMRNDhDVDm4qxlyPt1K+GrDhUvRvR8MjlBq0RH65OVVaCXn3OuvyVWK8CdlQpxgrc/5YspHw==" crossorigin="anonymous"></script>
     <!--this is to reference the p5.js I use for this code-->
     <script>
         var docMod = document.lastModified; // gets last modified date and time of the index.html file
         console.log("This file last modified  " + docMod); // displays last modified date and time in the javascipt browser console
     </script>
+
 </head>
-<div class="header">
-    <h1>Detecting Lead in Water</h1>
+<script>
+    let sketch = function(p) { // this is used to credit pj5s by adding p in front to use the code
+        let pixelInfo; // declares variable pixelInfo
+        let pixelP; //declare the variable pixelP
 
-    <body>
-        <div data-role="page">
+        let input; //declares the variable input for canvas purposes
+        let img; // declares the variable img
 
-            <div data-role='container'>
-                <script>
-                    let sketch = function(p) { // this is used to credit pj5s by adding p in front to use the code
-                        let pixelInfo; // declares variable pixelInfo
-                        let pixelP; //declare the variable pixelP
+        p.setup = function() { // how to create a canvas and choose a file to put into the canvas
+            p.createCanvas(500, 400) // this creates a canvas to paste the image
+            input = p.createFileInput(handleFile); // this is a choose file that can then choose an image from the device
+            input.position(400, 700); // this tells where to button on the app page
+            pixelP = p.createP('') // used for paragraph length text
+        }
 
-                        let input; //declares the variable input for canvas purposes
-                        let img; // declares the variable img
-
-
-                        p.setup = function() { // how to create a canvas and choose a file to put into the canvas
-                            p.createCanvas(600, 500) // this creates a canvas to paste the image
-                            input = p.createFileInput(handleFile); // this is a choose file that can then choose an image from the device
-                            input.position(400, 650); // this tells where to button on the app page
-                            pixelP = p.createP('') // used for paragraph length text
-                        }
-
-                        p.draw = function() { // this is how to image process on the canvas
-                            if (img) {
-                                p.image(img, 0, 0, p.width, p.height); // this is telling the parameters of the canvas 
-                                if (p.mouseX < 600 && p.mouseY < 500) { //setting up the rules for the canvas for the cursor to understand the pixel data
-                                    pixelInfo = p.get(p.mouseX, p.mouseY) // this will get all the pixel info from inside the canvas
-                                }
-                                pixelP.html(pixelInfo) // 
-                            }
-                        }
-                        let handleFile = function(file) {
-                            console.log(file.name) //this will tests out if the function is working
-                            if (file.type === 'image') {
-                                img = p.createImg(file.data, '');
-                                console.log(img) // checks to see if img is defined
-                                img.hide();
-                            } else {
-                                img = null;
-                            }
-                        }
-                    };
-                    new p5(sketch, 'container');
-                </script>
-
-
-
-            </div>
-            <!-- /content -->
-            <style>
-                .header {
-                    padding: 15px;
-                    text-align: center;
-                    background: orange;
-                    color: white;
-                    font-size: 15px;
+        p.draw = function() { // this is how to image process on the canvas
+            if (img) {
+                p.image(img, 0, 0, p.width, p.height); // this is telling the parameters of the canvas 
+                if (p.mouseX < 500 && p.mouseX >= 0 && p.mouseY < 400 && p.mouseY >= 0) { //setting up the rules for the canvas for the cursor to understand the pixel data
+                    pixelInfo = p.get(p.mouseX, p.mouseY) // this will get all the pixel info from inside the canvas
                 }
-                
-                .footer {
-                    position: fixed;
-                    left: 0;
-                    bottom: 0;
-                    width: 100%;
-                    background-color: orange;
-                    color: white;
-                    text-align: center;
-                }
-            </style>
 
-            <div class="footer">
-                <p>DIY Diagnostics</p>
-            </div>
-            <!-- /footer -->
-        </div>
-        <!-- /page -->
-    </body>
+                console.log(pixelInfo) //prints out the RGBA values and whether they fit criteria or yellow or not
+
+                if (pixelInfo && pixelInfo[0] >= 200 && pixelInfo[1] >= 120 && pixelInfo[2] < 50) { // If statement that says if pixel info reaches a certain value or within those values
+
+                    pixelP.html("yellow") // if the values fit the if statement, it will out put yellow
+                    console.log("yellow") // this is to check if the if statement is working
+                    console.log(p.mouseX, p.mouseY) // this makes sure the cursor is going over every pixel 
+                } // check if pixelInfo is defined
+                else {
+                    pixelP.html("Not Yellow") // anything that doesn't fit the if statment will be Not Yellow
+                }
+
+
+
+            }
+        }
+        let handleFile = function(file) {
+            console.log(file.name) //this will tests out if the function is working
+            if (file.type === 'image') {
+                img = p.createImg(file.data, '');
+                console.log(img) // checks to see if img is defined
+                img.hide();
+            } else {
+                img = null;
+            }
+
+        }
+
+
+    };
+
+    new p5(sketch, 'container');
+</script>
+
+<style>
+    .header {
+        padding: 12px;
+        text-align: center;
+        background: orange;
+        color: white;
+        font-size: 12px;
+    }
+    
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: orange;
+        color: white;
+        text-align: center;
+    }
+</style>
+
+<body>
+    <div class="header">
+        <h1>Detecting Lead in Water</h1>
+    </div>
+
+    <div id="content" class="w3-container">
+        <p>This is a diagnostic app that can detect if lead is in your drinking water</p>
+        <p>The instructions are simple! </p>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+    </div>
+    <!-- /content -->
+
+
+    <div class="footer">
+        <p>DIY Diagnostics</p>
+    </div>
+    <!-- /footer -->
+    </div>
+    <!-- /page -->
+</body>
 
 
 </html>
