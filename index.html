@@ -70,7 +70,7 @@
 
                 console.log(pixelInfo) //prints out the RGBA values and whether they fit criteria or yellow or not
 
-                if (pixelInfo && pixelInfo[0] >= 200 && pixelInfo[1] >= 120 && pixelInfo[2] < 150) { // If statement that says if pixel info reaches a certain value or within those values
+                if (pixelInfo && pixelInfo[0] >= 150 && pixelInfo[1] >= 120 && pixelInfo[2] <= 150) { // If statement that says if pixel info reaches a certain value or within those values
 
                     pixelP.html("yellow") // if the values fit the if statement, it will out put yellow
                     console.log("yellow") // this is to check if the if statement is working
